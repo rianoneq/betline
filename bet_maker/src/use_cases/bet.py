@@ -21,7 +21,7 @@ class CreateBetUseCase:
     message_broker: BaseMessageBroker
 
     async def execute(self, command: CreateBetCommand) -> Bet:
-        await self.event_service.check_avaiblity_to_bet(event_id=command.bet.event_id)
+        await self.event_service.check_avaiblity_to_bet(event_id=command.bet.event_id, bet_amount=command.bet.amount)
         bet = await self.bet_service.create(command.bet)
         await self.message_broker.send_message(
             topic=settings.new_bet_topic,

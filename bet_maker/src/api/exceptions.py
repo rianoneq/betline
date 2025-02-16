@@ -21,6 +21,7 @@ from domain.exceptions.bet import (
     BetNotFoundException,
 )
 from domain.exceptions.event import (
+    BetAmountTooLowException,
     EventCompletedException,
     EventDeadlineInPastException,
     EventNotFoundException,
@@ -49,6 +50,9 @@ def setup_exception_handlers(app: FastAPI) -> None:
     )
     app.add_exception_handler(
         EventDeadlineInPastException, error_handler(status.HTTP_409_CONFLICT)
+    )
+    app.add_exception_handler(
+        BetAmountTooLowException, error_handler(status.HTTP_409_CONFLICT)
     )
     # app.add_exception_handler(Exception, unknown_exception_handler)
 

@@ -13,6 +13,7 @@ from sqlalchemy import (
 
 from domain.entities.event import Event
 from domain.exceptions.event import (
+    BetAmountTooLowException,
     CannotCompleteNotFoundEventException,
     EventAlreadyExistsException,
     EventCompletedException,
@@ -45,7 +46,10 @@ class ORMEventService(BaseEventService):
         async with self.database.get_session() as session:
             await session.execute(update(EventORM), [asdict(event)])
 
-    async def check_avaiblity_to_bet(self, event_id: UUID) -> None:
+    async def check_avaiblity_to_bet(self, event_id: UUID, bet_amount: float) -> None:
+        if bet_amount <= 0:
+            raise BetAmountTooLowException()
+
         event = await self.get_event(event_id)
         if not event:
             raise EventNotFoundException()

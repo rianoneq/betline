@@ -10,6 +10,13 @@ class EventNotFoundException(Exception):
 
 
 @dataclass(eq=False)
+class BetAmountTooLowException(Exception):
+    @property
+    def message(self):
+        return "Сумма ставки > 0."
+
+
+@dataclass(eq=False)
 class EventCompletedException(Exception):
     @property
     def message(self):
