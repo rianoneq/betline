@@ -23,7 +23,8 @@ cd betline/bet_maker
 cd betline/line_provider
 ```
 
-далее действия дублируются на каждый из терминалов (сервисов)
+Далее действия дублируются на каждый из терминалов (сервисов)
+Важно! Начать собирать bet_maker после line_provider
 
 5. Создать .env в корне проекта рядом с .env.example и заполнить его такими же данными
 
@@ -59,20 +60,11 @@ cd betline/line_provider
          docker exec -it bet-main-app alembic upgrade heads
       ```
 
-8. Перезапустить bet_maker
-   - make
-      ``` sh
-         make app
-      ```
-   - docker
-      ``` sh
-         docker compose -f docker_compose/app.yaml -f docker_compose/storages.yaml -p bet-maker up -d --build
-      ```
-9. Перейти в доки
+8. Перейти в доки
   - http://localhost:8001/api/docs
   - http://localhost:8000/api/docs
 
-10. Проверить логи
+9. Проверить логи
     - make
         ```sh
           make app-logs
@@ -86,7 +78,7 @@ cd betline/line_provider
        ```sh
         docker logs -f bet-main-app
         ```
-11. Запустить тесты
+10. Запустить тесты
    - make
         ```sh
          make tests
