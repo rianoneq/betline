@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
 
     ports:
-      - "${API_PORT}:8000"
+      - "8001:8000"
     volumes:
       - ../src/:/src/
     container_name: bet-main-app
