@@ -24,12 +24,12 @@ cd betline/line_provider
 ```
 
 Далее действия дублируются на каждый из терминалов (сервисов)
-### Важно! 
-Начать собирать bet_maker после line_provider
 
 5. Создать .env в корне проекта рядом с .env.example и заполнить его такими же данными
 
 6. Поднять сервис командой make либо docker
+### Важно! 
+Начать собирать bet_maker после line_provider
    - make
     ```sh
       make app
@@ -45,7 +45,7 @@ cd betline/line_provider
          docker compose -f docker_compose/app.yaml -f docker_compose/storages.yaml -p bet-maker up -d --build
       ```
 
-7. Провести миграции
+8. Провести миграции
    - make
    ``` sh
     make migrate
@@ -61,7 +61,7 @@ cd betline/line_provider
          docker exec -it bet-main-app alembic upgrade heads
       ```
 
-8. Перейти в доки
+9. Перейти в доки
   - http://localhost:8001/api/docs
   - http://localhost:8000/api/docs
 
