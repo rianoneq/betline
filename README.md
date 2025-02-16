@@ -45,7 +45,7 @@ cd betline/line_provider
          docker compose -f docker_compose/app.yaml -f docker_compose/storages.yaml -p bet-maker up -d --build
       ```
 
-8. Провести миграции
+7. Провести миграции
    - make
    ``` sh
     make migrate
@@ -61,7 +61,7 @@ cd betline/line_provider
          docker exec -it bet-main-app alembic upgrade heads
       ```
 
-9. Перейти в доки
+8. Перейти в доки
   - http://localhost:8001/api/docs
   - http://localhost:8000/api/docs
 
