@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  main-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    ports:
+      - "${API_PORT}:8000"
+    volumes:
+      - ../src/:/src/
+    container_name: bet-main-app
+    env_file:
+      - ../.env
+
+    command: "uvicorn --factory api.main:web_app_factory --timeout-graceful-shutdown 2 --host 0.0.0.0 --port 8000 --reload"
+    networks:
+      - service_linking
+      - bets
+
+
+networks:
+  service_linking:
+    driver: bridge
+    external: true
+  bets:
+    driver: bridge

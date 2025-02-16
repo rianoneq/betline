@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  main-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    ports:
+      - "${API_PORT}:8000"
+    volumes:
+      - ../src/:/src/
+    container_name: line-main-app
+    env_file:
+      - ../.env
+    networks:
+      - service_linking
+      - line
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+    command: "uvicorn --factory api.main:web_app_factory --timeout-graceful-shutdown 2 --host 0.0.0.0 --port 8000 --reload"
+
+networks:
+  service_linking:
+    driver: bridge
+    external: true
+  line:
+    driver: bridge

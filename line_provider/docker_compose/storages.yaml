@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: le-postgres-db
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ../.env
+    networks:
+      - line
+
+volumes:
+  postgres_data:
+
+networks:
+  line:
+    driver: bridge
